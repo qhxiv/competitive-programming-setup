@@ -1,0 +1,77 @@
+import java.io.*;
+import java.util.*;
+
+class sv {
+    String id, name, className;
+
+    public sv(String id, String name, String className) {
+        this.id = id;
+        this.name = name;
+        this.className = className;
+    }
+
+    public String toString() {
+        return String.format("%s %s %s", id, name, className);
+    }
+}
+
+class dn {
+    String id, name;
+    int quantity;
+
+    public dn(String id, String name, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+    }
+}
+
+public class Main {
+    public static Scanner in = new Scanner(System.in);
+    public static PrintWriter out = new PrintWriter(System.out);
+    
+    public static void main(String[] args) throws FileNotFoundException {
+        in = new Scanner(new File("SINHVIEN.in"));
+        int n = Integer.parseInt(in.nextLine());
+        HashMap<String, sv> svs = new HashMap<>();
+        for (int i = 0; i < n; ++i) {
+            String id = in.nextLine();
+            svs.put(id, new sv(id, in.nextLine(), in.nextLine()));
+            in.nextLine();
+        }
+        
+        in = new Scanner(new File("DN.in"));
+        n = Integer.parseInt(in.nextLine());
+        HashMap<String, dn> dns = new HashMap<>();
+        for (int i = 0; i < n; ++i) {
+            String id = in.nextLine();
+            dns.put(id, new dn(id, in.nextLine(), Integer.parseInt(in.nextLine())));
+        }
+
+        in = new Scanner(new File("THUCTAP.in"));
+        n = Integer.parseInt(in.nextLine());
+        HashMap<String, ArrayList<String>> tt = new HashMap<>();
+        for (int i = 0; i < n; ++i) {
+            String svi = in.next();
+            String dni = in.next();
+            if (tt.get(dni) == null)
+                tt.put(dni, new ArrayList<String>());
+            tt.get(dni).add(svi);
+        }
+        n = in.nextInt();
+        while (n-- > 0) {
+            String id = in.next();
+            List<String> list = new ArrayList<>(tt.get(id));
+            Collections.sort(list, new Comparator<dn>() {
+
+                @Override
+                public int compare(dn o1, dn o2) {
+                    return o1.id.compareTo(o2.id);
+                }
+                
+            });
+        }
+
+        out.close();
+    }
+}

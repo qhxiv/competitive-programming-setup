@@ -6,8 +6,8 @@ public class Main {
     public static PrintWriter out = new PrintWriter(System.out);
     
     public static void main(String[] args) {
-        int T = in.nextInt();
-        for (int tt = 0; tt < T; ++tt) {
+        int n = Integer.parseInt(in.nextLine());
+        for (int i = 0; i < n; ++i) {
             
         }
         out.close();
